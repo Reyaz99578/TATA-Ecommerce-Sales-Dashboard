@@ -1,6 +1,5 @@
-# TATA-Ecommerce-Sales-Dashboard
+# 📊 TATA-Ecommerce-Sales-Dashboard
 
-# 📊 TATA eCommerce Sales Dashboard
 
 This project presents an **interactive Power BI dashboard** analyzing TATA eCommerce sales data to uncover business performance, customer behavior, and regional trends.
 
