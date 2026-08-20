@@ -1,454 +1,51 @@
+TATA E-Commerce Sales Dashboard
+An interactive Power BI dashboard analyzing TATA eCommerce sales data to uncover business performance, customer behavior, and regional trends.
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TATA E-Commerce Sales Dashboard — Project README</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg: #F5F7FA;
-    --surface: #FFFFFF;
-    --ink: #16213E;
-    --ink-soft: #4B5670;
-    --muted: #7B849C;
-    --border: #E3E7EF;
-    --navy: #22345E;
-    --amber: #E8A33D;
-    --teal: #2E8B8B;
-    --amber-tint: #FBF1E1;
-    --teal-tint: #E7F2F2;
-    --navy-tint: #EBEEF5;
-    --radius: 14px;
-    --shadow: 0 1px 2px rgba(22,33,62,0.04), 0 8px 24px -12px rgba(22,33,62,0.12);
-  }
 
-  *{box-sizing:border-box; margin:0; padding:0;}
+📌 1. Project Overview
+This project presents an interactive Power BI dashboard built to:
 
-  html{scroll-behavior:smooth;}
+Monitor overall sales performance
+Analyze customer purchasing behavior
+Identify top-performing regions
+Track category-wise sales
+Enable data-driven business decisions
 
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Inter', sans-serif;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
+🛠️ 2. Tools Used
+Power BI
+Data Cleaning & Modeling
+DAX
+Data Visualization
 
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
-  }
 
-  h1,h2,h3,.mono{font-family:'Space Grotesk', sans-serif;}
-  .data{font-family:'JetBrains Mono', monospace;}
+📊 3. Dashboard Features
+KPI cards for sales overview
+Region-wise sales analysis
+Category performance insights
+Customer segmentation
+Interactive filters and slicers
 
-  a{color:inherit;}
-  :focus-visible{outline:2px solid var(--teal); outline-offset:3px; border-radius:4px;}
+tata-ecommerce-sales-dashboard/
+│
+├── TATA_ECOMMERCE_SALES_DASHBOARD.pbix
+├── README.md
+└── dataset (if included)
 
-  .wrap{max-width:960px; margin:0 auto; padding:0 28px;}
 
-  /* ---------- HERO ---------- */
-  .hero{
-    padding:72px 0 56px;
-    background:
-      radial-gradient(ellipse 900px 420px at 15% -10%, rgba(34,52,94,0.06), transparent 60%),
-      var(--bg);
-    border-bottom:1px solid var(--border);
-  }
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase;
-    color:var(--teal); font-weight:600;
-    background:var(--teal-tint);
-    padding:6px 12px; border-radius:100px;
-    margin-bottom:22px;
-  }
-  .eyebrow::before{content:''; width:6px; height:6px; border-radius:50%; background:var(--teal);}
+🚀 5. How to Use
+Download the .pbix file
+Open it in Power BI Desktop
+Interact with the filters and visuals to explore the data
 
-  .hero-grid{
-    display:grid; grid-template-columns:1.15fr 0.85fr; gap:48px; align-items:center;
-  }
-  @media (max-width:820px){ .hero-grid{grid-template-columns:1fr;} }
+📈 6. Key Insights
+Top regions contribute the majority of revenue
+Certain product categories drive most sales
+Seasonal trends impact order volume
+Customer segmentation reveals high-value buyers
+(Update with your actual findings from the analysis.)
 
-  .hero h1{
-    font-size:clamp(32px, 4.4vw, 46px);
-    font-weight:700;
-    line-height:1.08;
-    letter-spacing:-0.015em;
-    color:var(--navy);
-    margin-bottom:18px;
-  }
-  .hero h1 span{color:var(--amber);}
+🤝 7. Contributing
+Feel free to fork this repository and enhance the dashboard
 
-  .hero p.lead{
-    font-size:17px; color:var(--ink-soft); max-width:52ch; margin-bottom:28px;
-  }
-
-  .badge-row{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:32px;}
-  .badge{
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px; font-weight:500;
-    padding:6px 11px; border-radius:7px;
-    background:var(--navy-tint); color:var(--navy);
-    border:1px solid var(--border);
-  }
-
-  .cta-row{display:flex; flex-wrap:wrap; gap:12px;}
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    padding:12px 20px; border-radius:9px;
-    font-weight:600; font-size:14.5px;
-    text-decoration:none;
-    transition:transform 0.15s ease, box-shadow 0.15s ease;
-  }
-  .btn:hover{transform:translateY(-1px);}
-  .btn-primary{background:var(--navy); color:#fff; box-shadow:var(--shadow);}
-  .btn-ghost{background:transparent; color:var(--navy); border:1.5px solid var(--border);}
-  .btn-ghost:hover{border-color:var(--navy);}
-
-  /* ---------- Signature: mini dashboard card ---------- */
-  .dash-card{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
-    padding:22px 22px 18px;
-  }
-  .dash-card .dash-head{
-    display:flex; justify-content:space-between; align-items:baseline;
-    margin-bottom:16px;
-  }
-  .dash-card .dash-title{font-size:13px; font-weight:600; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.04em;}
-  .dash-card .dash-tag{font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--teal); background:var(--teal-tint); padding:3px 8px; border-radius:6px;}
-
-  .bars{display:flex; align-items:flex-end; gap:10px; height:120px; margin-bottom:8px;}
-  .bar{flex:1; border-radius:6px 6px 3px 3px; background:linear-gradient(180deg, var(--teal), #1f6b6b); position:relative; width:0; transform-origin:bottom;}
-  .bar:nth-child(2){background:linear-gradient(180deg, var(--amber), #c47f22);}
-  .bar-labels{display:flex; gap:10px; font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--muted);}
-  .bar-labels span{flex:1; text-align:center;}
-
-  @keyframes growBar{ from{ height:0; } }
-
-  .kpi-row{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:18px;}
-  .kpi{background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:10px 12px;}
-  .kpi .num{font-family:'JetBrains Mono', monospace; font-weight:600; font-size:17px; color:var(--navy);}
-  .kpi .lbl{font-size:10.5px; color:var(--muted); margin-top:2px;}
-
-  /* ---------- SECTIONS ---------- */
-  section{padding:52px 0; border-bottom:1px solid var(--border);}
-  section:last-of-type{border-bottom:none;}
-
-  .sec-label{
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
-    color:var(--amber); font-weight:600; margin-bottom:10px;
-  }
-  section h2{font-size:26px; color:var(--navy); margin-bottom:18px; letter-spacing:-0.01em;}
-  section p{color:var(--ink-soft); max-width:70ch;}
-
-  .two-col{display:grid; grid-template-columns:220px 1fr; gap:40px;}
-  @media (max-width:700px){ .two-col{grid-template-columns:1fr; gap:14px;} }
-
-  /* Tools chips */
-  .tool-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:6px;}
-  @media (max-width:560px){ .tool-grid{grid-template-columns:1fr;} }
-  .tool{
-    display:flex; align-items:center; gap:12px;
-    background:var(--surface); border:1px solid var(--border); border-radius:11px;
-    padding:14px 16px;
-  }
-  .tool .dot{width:10px; height:10px; border-radius:3px; flex-shrink:0;}
-  .tool .name{font-weight:600; font-size:14.5px; color:var(--ink);}
-  .tool .role{font-size:12.5px; color:var(--muted);}
-
-  /* Feature list */
-  .feature-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:6px;}
-  @media (max-width:640px){ .feature-grid{grid-template-columns:1fr;} }
-  .feature{
-    background:var(--surface); border:1px solid var(--border); border-radius:12px;
-    padding:18px;
-  }
-  .feature .icon{
-    width:34px; height:34px; border-radius:9px; background:var(--navy-tint);
-    display:flex; align-items:center; justify-content:center; margin-bottom:12px;
-    color:var(--navy); font-family:'JetBrains Mono', monospace; font-weight:700; font-size:14px;
-  }
-  .feature h3{font-size:15px; color:var(--ink); margin-bottom:5px;}
-  .feature p{font-size:13.5px; color:var(--muted); max-width:none;}
-
-  /* Structure / code block */
-  .code-block{
-    background:var(--navy); color:#DCE3F5;
-    border-radius:12px; padding:20px 22px;
-    font-family:'JetBrains Mono', monospace; font-size:13px; line-height:1.9;
-    overflow-x:auto;
-  }
-  .code-block .c1{color:#8FA3D6;}
-  .code-block .c2{color:var(--amber);}
-
-  /* Steps (genuinely sequential) */
-  .steps{counter-reset:step; margin-top:6px;}
-  .step{
-    display:grid; grid-template-columns:36px 1fr; gap:16px;
-    padding:14px 0; border-bottom:1px dashed var(--border);
-  }
-  .step:last-child{border-bottom:none;}
-  .step::before{
-    counter-increment:step; content:counter(step);
-    width:36px; height:36px; border-radius:50%;
-    background:var(--teal-tint); color:var(--teal);
-    display:flex; align-items:center; justify-content:center;
-    font-family:'JetBrains Mono', monospace; font-weight:600; font-size:14px;
-  }
-  .step .step-body strong{display:block; font-size:14.5px; color:var(--ink); margin-bottom:2px;}
-  .step .step-body span{font-size:13.5px; color:var(--muted);}
-
-  /* Insights */
-  .insight-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:6px;}
-  @media (max-width:640px){ .insight-grid{grid-template-columns:1fr;} }
-  .insight{
-    border-left:3px solid var(--amber);
-    background:var(--amber-tint);
-    border-radius:0 10px 10px 0;
-    padding:14px 16px;
-    font-size:14px; color:#5A4321;
-  }
-  .insight b{color:#3D2E16;}
-  .insight-note{
-    margin-top:14px; font-size:12.5px; color:var(--muted); font-style:italic;
-  }
-
-  /* Impact */
-  .impact-list{list-style:none; margin-top:10px;}
-  .impact-list li{
-    display:flex; gap:12px; padding:10px 0; font-size:14.5px; color:var(--ink-soft);
-    border-bottom:1px solid var(--border);
-  }
-  .impact-list li:last-child{border-bottom:none;}
-  .impact-list li::before{content:'→'; color:var(--teal); font-weight:700; flex-shrink:0;}
-
-  /* Footer */
-  footer{padding:44px 0 60px;}
-  .footer-card{
-    background:var(--navy); color:#fff; border-radius:16px;
-    padding:36px 32px; display:flex; justify-content:space-between; align-items:center; gap:24px;
-    flex-wrap:wrap;
-  }
-  .footer-card h3{font-size:20px; margin-bottom:6px;}
-  .footer-card p{color:#B9C4E0; font-size:14px;}
-  .star-btn{
-    background:var(--amber); color:#3D2E16; border:none;
-    padding:12px 22px; border-radius:9px; font-weight:700; font-size:14px;
-    cursor:pointer; font-family:'Inter', sans-serif;
-    display:flex; align-items:center; gap:8px;
-    transition:transform 0.15s ease;
-  }
-  .star-btn:hover{transform:translateY(-1px) scale(1.02);}
-  .contact-line{margin-top:26px; font-size:13px; color:var(--muted); text-align:center;}
-</style>
-</head>
-<body>
-
-<div class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="eyebrow">Power BI · Portfolio Project</div>
-      <h1>TATA E-Commerce<br>Sales <span>Dashboard</span></h1>
-      <p class="lead">An interactive Power BI dashboard analyzing TATA eCommerce sales data — uncovering business performance, customer behavior, and regional trends to support data-driven decisions.</p>
-      <div class="badge-row">
-        <span class="badge">POWER BI</span>
-        <span class="badge">DAX</span>
-        <span class="badge">POWER QUERY</span>
-        <span class="badge">DATA MODELING</span>
-      </div>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="#usage">View .pbix →</a>
-        <a class="btn btn-ghost" href="#footer">⭐ Star this repo</a>
-      </div>
-    </div>
-
-    <div class="dash-card" aria-hidden="true">
-      <div class="dash-head">
-        <span class="dash-title">Region-wise Sales</span>
-        <span class="dash-tag">live sample</span>
-      </div>
-      <div class="bars">
-        <div class="bar" data-h="62" style="background:linear-gradient(180deg, var(--teal), #1f6b6b);"></div>
-        <div class="bar" data-h="98" style="background:linear-gradient(180deg, var(--amber), #c47f22);"></div>
-        <div class="bar" data-h="45" style="background:linear-gradient(180deg, var(--teal), #1f6b6b);"></div>
-        <div class="bar" data-h="71" style="background:linear-gradient(180deg, var(--teal), #1f6b6b);"></div>
-        <div class="bar" data-h="38" style="background:linear-gradient(180deg, var(--teal), #1f6b6b);"></div>
-      </div>
-      <div class="bar-labels">
-        <span>North</span><span>West</span><span>South</span><span>East</span><span>Central</span>
-      </div>
-      <div class="kpi-row">
-        <div class="kpi"><div class="num" id="kpi1">0</div><div class="lbl">Total Sales</div></div>
-        <div class="kpi"><div class="num" id="kpi2">0</div><div class="lbl">Orders</div></div>
-        <div class="kpi"><div class="num" id="kpi3">0%</div><div class="lbl">Top Region Share</div></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="wrap">
-
-  <section id="overview">
-    <div class="two-col">
-      <div class="sec-label">01 — Overview</div>
-      <div>
-        <h2>Project Overview</h2>
-        <p>This dashboard was built to give stakeholders a single, interactive view of eCommerce performance — turning raw transactional data into insight that's easy to act on.</p>
-        <ul class="impact-list" style="margin-top:16px;">
-          <li>Monitor overall sales performance in real time</li>
-          <li>Analyze customer purchasing behavior and patterns</li>
-          <li>Identify top-performing regions and market gaps</li>
-          <li>Track category-wise sales trends</li>
-          <li>Enable faster, data-driven business decisions</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="tools">
-    <div class="two-col">
-      <div class="sec-label">02 — Stack</div>
-      <div>
-        <h2>Tools & Technologies</h2>
-        <div class="tool-grid">
-          <div class="tool"><div class="dot" style="background:var(--amber);"></div><div><div class="name">Power BI Desktop</div><div class="role">Dashboard design & visualization</div></div></div>
-          <div class="tool"><div class="dot" style="background:var(--teal);"></div><div><div class="name">DAX</div><div class="role">Custom measures & calculated fields</div></div></div>
-          <div class="tool"><div class="dot" style="background:var(--navy);"></div><div><div class="name">Power Query</div><div class="role">Data cleaning & transformation</div></div></div>
-          <div class="tool"><div class="dot" style="background:#8FA3D6;"></div><div><div class="name">Data Modeling</div><div class="role">Relationship building across tables</div></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="features">
-    <div class="two-col">
-      <div class="sec-label">03 — Features</div>
-      <div>
-        <h2>Dashboard Features</h2>
-        <div class="feature-grid">
-          <div class="feature"><div class="icon">KPI</div><h3>KPI Cards</h3><p>Total Sales, Orders, Profit and AOV at a glance.</p></div>
-          <div class="feature"><div class="icon">🌍</div><h3>Region-wise Analysis</h3><p>Geographic performance breakdown across zones.</p></div>
-          <div class="feature"><div class="icon">🏷️</div><h3>Category Insights</h3><p>Best and worst performing product categories.</p></div>
-          <div class="feature"><div class="icon">👤</div><h3>Customer Segmentation</h3><p>High-value vs. low-value buyer identification.</p></div>
-        </div>
-        <p style="margin-top:14px; font-size:14px;">Plus interactive filters and slicers for dynamic drill-down by date, region, and category.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="structure">
-    <div class="two-col">
-      <div class="sec-label">04 — Structure</div>
-      <div>
-        <h2>Project Structure</h2>
-        <div class="code-block">
-tata-ecommerce-sales-dashboard/<br>
-├── <span class="c2">TATA_ECOMMERCE_SALES_DASHBOARD.pbix</span> <span class="c1"># Main Power BI file</span><br>
-├── <span class="c2">README.md</span> <span class="c1"># Project documentation</span><br>
-└── <span class="c2">dataset/</span> <span class="c1"># Source data (if included)</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="usage">
-    <div class="two-col">
-      <div class="sec-label">05 — Usage</div>
-      <div>
-        <h2>How to Use</h2>
-        <div class="steps">
-          <div class="step"><div class="step-body"><strong>Clone or download</strong><span>Get this repository onto your machine.</span></div></div>
-          <div class="step"><div class="step-body"><strong>Open in Power BI Desktop</strong><span>Launch the .pbix file directly.</span></div></div>
-          <div class="step"><div class="step-body"><strong>Explore</strong><span>Interact with filters and slicers to drill into the data.</span></div></div>
-          <div class="step"><div class="step-body"><strong>(Optional) Reuse the structure</strong><span>Connect your own dataset to the existing report model.</span></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="insights">
-    <div class="two-col">
-      <div class="sec-label">06 — Findings</div>
-      <div>
-        <h2>Key Insights</h2>
-        <div class="insight-grid">
-          <div class="insight">Top 3 regions contribute over <b>60% of total revenue</b>.</div>
-          <div class="insight">A small set of product categories drive the <b>majority of sales volume</b>.</div>
-          <div class="insight">Clear <b>seasonal spikes</b> in order volume during festive periods.</div>
-          <div class="insight">A distinct <b>high-value buyer group</b> emerges from segmentation — worth targeting for retention.</div>
-        </div>
-        <p class="insight-note">Replace these with your actual numbers from the analysis for maximum credibility.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="impact">
-    <div class="two-col">
-      <div class="sec-label">07 — Impact</div>
-      <div>
-        <h2>Business Impact</h2>
-        <p>This project demonstrates the ability to:</p>
-        <ul class="impact-list">
-          <li>Transform raw sales data into actionable business intelligence</li>
-          <li>Design intuitive, stakeholder-friendly dashboards</li>
-          <li>Apply DAX and data modeling to solve real business problems</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-</div>
-
-<footer id="footer">
-  <div class="wrap">
-    <div class="footer-card">
-      <div>
-        <h3>Found this useful?</h3>
-        <p>Fork it, enhance it, or drop a star to support the project.</p>
-      </div>
-      <button class="star-btn">⭐ Star this repo</button>
-    </div>
-    <p class="contact-line">Connect: <em>[Add your LinkedIn / Email here]</em></p>
-  </div>
-</footer>
-
-<script>
-  // Animate hero bars on load
-  document.querySelectorAll('.bar').forEach((bar, i) => {
-    const h = bar.dataset.h;
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        bar.style.transition = 'height 0.9s cubic-bezier(.2,.8,.2,1)';
-        bar.style.height = h + 'px';
-      }, i * 90);
-    });
-  });
-
-  // Count-up KPIs
-  function countUp(el, end, duration, suffix){
-    let start = 0;
-    const startTime = performance.now();
-    function tick(now){
-      const p = Math.min((now - startTime) / duration, 1);
-      const val = Math.floor(p * end);
-      el.textContent = val.toLocaleString() + (suffix || '');
-      if(p < 1) requestAnimationFrame(tick);
-      else el.textContent = end.toLocaleString() + (suffix || '');
-    }
-    requestAnimationFrame(tick);
-  }
-  countUp(document.getElementById('kpi1'), 842, 1100, 'K');
-  countUp(document.getElementById('kpi2'), 12480, 1100, '');
-  countUp(document.getElementById('kpi3'), 61, 1100, '%');
-</script>
-
-</body>
-</html>
+⭐ 8. Support
+If you found this useful, give the repo a star ⭐
