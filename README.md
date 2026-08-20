@@ -1,35 +1,45 @@
 
-📊 TATA E-Commerce Sales Dashboard
-An interactive Power BI dashboard analyzing TATA eCommerce sales data to uncover business performance, customer behavior, and regional trends — enabling data-driven decision-making for stakeholders.
-�
-�
-�
-Load image
-Load image
+TATA-Ecommerce-Sales-Dashboard
+This project presents an interactive Power BI dashboard analyzing TATA eCommerce sales data to uncover business performance, customer behavior, and regional trends.
+
 📌 Project Overview
-This dashboard was built to help stakeholders:
-📈 Monitor overall sales performance in real time
-🛒 Analyze customer purchasing behavior and patterns
-🌍 Identify top-performing regions and market gaps
-🏷️ Track category-wise sales trends
-🎯 Enable faster, data-driven business decisions
-🛠️ Tools & Technologies
-Tool
-Purpose
-Power BI Desktop
-Dashboard design & visualization
-DAX
-Custom measures & calculated fields
-Power Query
-Data cleaning & transformation
-Data Modeling
-Relationship building across tables
+The objective of this dashboard is to:
+
+Monitor overall sales performance
+Analyze customer purchasing behavior
+Identify top-performing regions
+Track category-wise sales
+Enable data-driven business decisions
+🛠️ Tools Used
+Power BI
+Data Cleaning & Modeling
+DAX (if used)
+Data Visualization
 📊 Dashboard Features
-✅ KPI Cards — Total Sales, Orders, Profit, AOV at a glance
-✅ Region-wise Sales Analysis — Geographic performance breakdown
-✅ Category Performance Insights — Best/worst performing product categories
-✅ Customer Segmentation — High-value vs. low-value buyer identification
-✅ Interactive Filters & Slicers — Dynamic drill-down by date, region, category
+KPI cards for sales overview
+Region-wise sales analysis
+Category performance insights
+Customer segmentation
+Interactive filters and slicers
+📂 Project Structure
+tata-ecommerce-sales-dashboard/ │ ├── TATA_ECOMMERCE_SALES_DASHBOARD.pbix ├── README.md └── dataset (if included)
+
+🚀 How to Use
+Download the .pbix file
+Open in Power BI Desktop
+Interact with filters and visuals
+📈 Key Insights
+Top regions contribute the majority of revenue
+Certain product categories drive most sales
+Seasonal trends impact order volume
+Customer segmentation reveals high-value buyers
+(Update with your actual findings.)
+
+🤝 Contributing
+Feel free to fork this repository and enhance the dashboard.
+
+⭐ Support
+If you found this useful, give the repo a star ⭐ drill-down by date, region, category
 📂 Project Structure
 Code
 🚀 How to Use
